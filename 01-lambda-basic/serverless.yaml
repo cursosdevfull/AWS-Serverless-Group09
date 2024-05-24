@@ -1,0 +1,11 @@
+service: lambda-basic
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: prd
+
+functions:
+  task:
+    handler: controller.task

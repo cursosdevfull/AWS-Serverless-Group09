@@ -1,0 +1,12 @@
+service: lambda-api-gateway
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  task:
+    handler: controller.task
+    events:
+      - http: "get /user"
