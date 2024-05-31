@@ -1,4 +1,4 @@
-import origen from "@functions/origen";
+import origen from '@functions/origen';
 
 import type { AWS } from "@serverless/typescript";
 
@@ -8,7 +8,7 @@ const serverlessConfiguration: AWS = {
   plugins: ["serverless-esbuild"],
   provider: {
     name: "aws",
-    runtime: "nodejs14.x",
+    runtime: "nodejs20.x",
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -36,7 +36,7 @@ const serverlessConfiguration: AWS = {
     esbuild: {
       bundle: true,
       minify: false,
-      sourcemap: true,
+      sourcemap: false,
       exclude: ["aws-sdk"],
       target: "node14",
       define: { "require.resolve": undefined },

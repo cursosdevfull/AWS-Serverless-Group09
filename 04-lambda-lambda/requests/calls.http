@@ -1,0 +1,9 @@
+post https://r8w461icie.execute-api.us-east-1.amazonaws.com/dev/origen
+Content-Type: application/json
+
+{
+    "functionName": "destino-dev-destino",
+    "action": "SCHEDULE",
+    "name": "FirstAction",
+    "url": "https://midominio.com"
+}
