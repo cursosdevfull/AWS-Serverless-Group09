@@ -1,0 +1,17 @@
+post https://oac0rrb6xl.execute-api.us-east-1.amazonaws.com/dev/execute
+Content-Type: application/json
+
+{
+	"country": "PE",
+	"patient": {
+		"name": "Luis",
+		"lastname": "Carranza"
+	},
+	"center": {
+		"id": 20
+	},
+	"dateHour": {
+		"date": "2024-06-01",
+		"hour": "14:00"
+	}
+}

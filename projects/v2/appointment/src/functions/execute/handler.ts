@@ -1,12 +1,10 @@
-import { InvocationType } from '@aws-sdk/client-lambda';
+import { IData, IPayload, TCountry } from "./repositories/sqs.repository";
+import { SQSService } from "./services/sqs.service";
 
-import { IData, IPayload, TCountry } from './repositories/lambda.repository';
-import { LambdaService } from './services/lambda.service';
-
-const functions: Record<TCountry, string> = {
-  PE: "appointment-pe-dev-execute",
-  CO: "appointment-co-dev-execute",
-  MX: "appointment-mx-dev-execute",
+const queueUrls: Record<TCountry, string> = {
+  PE: process.env.URL_SQS_PE,
+  CO: process.env.URL_SQS_CO,
+  MX: process.env.URL_SQS_MX,
 };
 
 const getData = (body: string): IData => {
@@ -38,21 +36,20 @@ const getPayload = (data: IData): IPayload => {
   };
 };
 
-const getFunctionName = (data: IData): string => {
+const getQueueUrl = (data: IData): string => {
   const country = data.country;
-  return functions[country];
+  return queueUrls[country];
 };
 
 const execute = async (event) => {
-  const service = new LambdaService();
+  const service = new SQSService();
 
   const data = getData(event.body);
-  const functionName = getFunctionName(data);
+  const queueUrl = getQueueUrl(data);
   const payload: IPayload = getPayload(data);
-  const invocationType: InvocationType = "RequestResponse";
 
   try {
-    await service.invoke(functionName, payload, invocationType);
+    await service.sentMessage(queueUrl, payload);
     return {
       statusCode: 200,
       body: "Message send!",

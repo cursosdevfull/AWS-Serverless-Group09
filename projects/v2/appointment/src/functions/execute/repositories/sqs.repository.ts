@@ -1,5 +1,3 @@
-import { InvocationType } from '@aws-sdk/client-lambda';
-
 export type TAction = "SCHEDULE" | "CANCEL";
 export type TCountry = "PE" | "CO" | "MX";
 export interface IData {
@@ -22,10 +20,6 @@ export interface IPayload {
   data: IData;
 }
 
-export interface LambdaRepository {
-  invoke(
-    functionName: string,
-    payload: IPayload,
-    invocationType: InvocationType
-  ): Promise<void>;
+export interface SQSRepository {
+  sentMessage(queueUrl: string, payload: IPayload): Promise<void>;
 }
