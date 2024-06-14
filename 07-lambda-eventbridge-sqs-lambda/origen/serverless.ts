@@ -1,4 +1,4 @@
-import hello from "@functions/hello";
+import execute from "@functions/execute";
 
 import type { AWS } from "@serverless/typescript";
 
@@ -30,7 +30,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { hello },
+  functions: { execute },
   package: { individually: true },
   custom: {
     esbuild: {
@@ -49,7 +49,7 @@ const serverlessConfiguration: AWS = {
       SQSClient: {
         Type: "AWS::SQS::Queue",
         Properties: {
-          QueueName: "origen-queue",
+          QueueName: "origen-queue-eventbridge",
         },
       },
       EventBusEB: {
@@ -73,7 +73,7 @@ const serverlessConfiguration: AWS = {
               Arn: {
                 "Fn::GetAtt": ["SQSClient", "Arn"],
               },
-              Id: "origen-sqs-target",
+              Id: "SQSClient",
             },
           ],
         },

@@ -3,7 +3,7 @@ import execute from "@functions/execute";
 import type { AWS } from "@serverless/typescript";
 
 const serverlessConfiguration: AWS = {
-  service: "destino",
+  service: "destino2",
   frameworkVersion: "3",
   plugins: ["serverless-esbuild"],
   provider: {

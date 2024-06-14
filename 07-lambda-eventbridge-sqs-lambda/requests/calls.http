@@ -1,0 +1,8 @@
+# send message
+post https://1nc4f7ci75.execute-api.us-east-1.amazonaws.com/dev/execute
+Content-Type: application/json
+
+{
+  "user": "user01",
+  "message": "Hello, World!"
+}
