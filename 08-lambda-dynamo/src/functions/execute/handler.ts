@@ -18,10 +18,7 @@ const execute = async (event: any) => {
   };
 
   const query = new QueryCommand(input);
-
   const response = await client.send(query);
-
-  console.log("response", response);
 
   return {
     statusCode: 200,
