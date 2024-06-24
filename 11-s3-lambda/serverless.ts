@@ -1,4 +1,4 @@
-import origen from "@functions/origen";
+import hello from "@functions/execute";
 
 import type { AWS } from "@serverless/typescript";
 
@@ -8,7 +8,7 @@ const serverlessConfiguration: AWS = {
   plugins: ["serverless-esbuild"],
   provider: {
     name: "aws",
-    runtime: "nodejs20.x",
+    runtime: "nodejs18.x",
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -16,22 +16,21 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
-      URL_SQS_DESTINO: { Ref: "SQSQueue" },
     },
     iam: {
       role: {
         statements: [
           {
             Effect: "Allow",
-            Action: ["sqs:SendMessage"],
-            Resource: "arn:aws:sqs:*:*:*",
+            Action: ["s3:GetObject"],
+            Resource: "arn:aws:s3:::bucket-event-s3/*",
           },
         ],
       },
     },
   },
   // import the function via paths
-  functions: { origen },
+  functions: { hello },
   package: { individually: true },
   custom: {
     esbuild: {
@@ -43,28 +42,6 @@ const serverlessConfiguration: AWS = {
       define: { "require.resolve": undefined },
       platform: "node",
       concurrency: 10,
-    },
-  },
-  resources: {
-    Resources: {
-      SQSQueue: {
-        Type: "AWS::SQS::Queue",
-        Properties: {
-          QueueName: "sqs-origen",
-          VisibilityTimeout: 10,
-          RedrivePolicy: {
-            deadLetterTargetArn: { "Fn::GetAtt": ["SQSQueueDLQ", "Arn"] },
-            maxReceiveCount: 1,
-          },
-        },
-      },
-      SQSQueueDLQ: {
-        Type: "AWS::SQS::Queue",
-        Properties: {
-          QueueName: "sqs-origen-dlq",
-          VisibilityTimeout: 10,
-        },
-      },
     },
   },
 };
