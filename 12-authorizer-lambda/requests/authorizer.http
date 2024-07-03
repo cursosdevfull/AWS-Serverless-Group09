@@ -1,0 +1,21 @@
+post https://azmwv6pgd5.execute-api.us-east-1.amazonaws.com/dev/register
+Content-Type: application/json
+
+{
+    "email": "sergio@email.com",
+    "password": "12345",
+    "name": "Sergio"
+}
+
+### Login
+post https://azmwv6pgd5.execute-api.us-east-1.amazonaws.com/dev/login
+Content-Type: application/json
+
+{
+    "email": "sergio@email.com",
+    "password": "12345"
+}
+
+### Validate
+post https://azmwv6pgd5.execute-api.us-east-1.amazonaws.com/dev/client
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcmdpb0BlbWFpbC5jb20iLCJuYW1lIjoiU2VyZ2lvIiwiaWF0IjoxNzE5NTM1MDQwLCJleHAiOjE3MTk1NTY2NDB9.pc68HwuMqITt1P829baQj7y_jvqDTC4c6D9hztdzwz0

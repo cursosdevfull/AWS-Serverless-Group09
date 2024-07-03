@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <form
+      [formGroup]="fg"
+      class="p-md-5 border rounded-3 bg-body-tertiary col-5 mt-5"
+    >
+      <h1 class="h3 mb-3 fw-normal">Register</h1>
+
+      <div class="form-floating p-1">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingUsername"
+          placeholder="username"
+          formControlName="username"
+        />
+        <label for="floatingUsername">Username</label>
+      </div>
+
+      <div class="form-floating p-1">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingFamilyName"
+          placeholder="family name"
+          formControlName="family_name"
+        />
+        <label for="floatingFamilyName">Lastname</label>
+      </div>
+
+      <div class="form-floating p-1">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingEmail"
+          placeholder="name@example.com"
+          formControlName="email"
+        />
+        <label for="floatingEmail">Email address</label>
+      </div>
+      <div class="form-floating p-1">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <button
+        class="btn btn-primary w-100 py-2 mt-2"
+        type="button"
+        [disabled]="fg.invalid"
+        (click)="register()"
+      >
+        Register
+      </button>
+      <div class="fs-6 fst-italic mt-3 text-center" style="color: #ed3a3a">
+        {{ message }}
+      </div>
+    </form>
+  </div>
+</div>
