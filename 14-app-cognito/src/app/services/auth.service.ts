@@ -116,4 +116,50 @@ export class AuthService {
   getAuthenticatedUser() {
     return userPool.getCurrentUser();
   }
+
+  askForPasswordReset(username: string) {
+    const userData = {
+      Username: username,
+      Pool: userPool,
+    };
+
+    const cognitoUser = new CognitoUser(userData);
+
+    cognitoUser.forgotPassword({
+      onSuccess: (result: any) => {
+        this.notification.next('Password reset code sent');
+        console.log('call result: ' + result);
+      },
+
+      onFailure: (err: any) => {
+        this.notification.next('Failed to send password reset code');
+        console.log(err);
+      },
+    });
+  }
+
+  generateNewPassword(username: string, code: string, newPassword: string) {
+    const userData = {
+      Username: username,
+      Pool: userPool,
+    };
+
+    const cognitoUser = new CognitoUser(userData);
+
+    cognitoUser.confirmPassword(code, newPassword, {
+      onSuccess: () => {
+        this.notification.next('New password changed');
+        console.log('Password changed!');
+      },
+
+      onFailure: (err: any) => {
+        this.notification.next('Failed to change password');
+        console.log(err);
+      },
+    });
+  }
+
+  logout() {
+    this.getAuthenticatedUser()?.signOut();
+  }
 }

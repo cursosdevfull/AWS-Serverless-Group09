@@ -9,15 +9,13 @@ const destino = async (event) => {
     console.log("url", url);
 
     if (name === "fail") {
-      return Promise.resolve({
+      return {
         status: false,
         id: record.messageId,
-        name,
-        url,
-      });
+      };
     }
 
-    return Promise.resolve({ status: true, id: record.messageId, name, url });
+    return { status: true, id: record.messageId };
   });
 
   const settledPromises = await Promise.all(promises);

@@ -1,18 +1,11 @@
-import schema from './schema';
 import { handlerPath } from '@libs/handler-resolver';
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.main`,
   events: [
     {
-      http: {
-        method: 'post',
-        path: 'hello',
-        request: {
-          schemas: {
-            'application/json': schema,
-          },
-        },
+      sqs: {
+        arn: "arn:aws:sqs:us-east-1:282865065290:sqs-origen-dlq"
       },
     },
   ],

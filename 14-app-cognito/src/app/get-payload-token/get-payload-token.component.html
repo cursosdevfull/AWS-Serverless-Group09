@@ -1,1 +1,17 @@
-<p>get-payload-token works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="p-md-5 border rounded-3 bg-body-tertiary col-5 mt-5">
+      <button
+        class="btn btn-primary w-100 py-2 mb-3"
+        type="button"
+        (click)="getPayloadToken()"
+      >
+        Get payload token
+      </button>
+      <pre>{{ payload | json }}</pre>
+      <div class="fs-6 fst-italic mt-3 text-center" style="color: #ed3a3a">
+        {{ message }}
+      </div>
+    </div>
+  </div>
+</div>

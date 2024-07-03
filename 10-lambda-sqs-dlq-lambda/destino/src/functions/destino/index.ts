@@ -7,7 +7,6 @@ export default {
       sqs: {
         arn: "arn:aws:sqs:us-east-1:282865065290:sqs-origen",
         batchSize: 10,
-        functionResponseType: "ReportBatchItemFailures",
       },
     },
   ],

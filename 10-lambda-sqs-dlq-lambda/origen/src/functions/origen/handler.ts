@@ -10,6 +10,10 @@ const origen = async (event) => {
   const body = JSON.parse(event.body);
   const { name, url } = body;
 
+  console.log("body", body);
+  console.log("name", name);
+  console.log("url", url);
+
   const input: SendMessageCommandInput = {
     MessageBody: JSON.stringify({ name, url }),
     QueueUrl: process.env.URL_SQS_DESTINO,
